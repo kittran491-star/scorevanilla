@@ -12,292 +12,300 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
+:root{
+  --honeydew:#F6FFE9;
+  --vanilla:#F2E0A4;
+  --periwinkle:#CAC5E5;
+  --amethyst:#A230A4;
+  --ultramarine:#290087;
+  --cream:#FFFDF7;
+}
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 body{
-    font-family:'Baloo 2',sans-serif;
-    background:#FFF8F4;
-    overflow-x:hidden;
-    color:#4B2D73;
-}
-
-/* ---------- BACKGROUND ---------- */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:
-    radial-gradient(circle at 10% 15%, #FFD8E8 0 110px, transparent 111px),
-    radial-gradient(circle at 88% 18%, #DCC7FF 0 120px, transparent 121px),
-    radial-gradient(circle at 15% 82%, #FFEAB9 0 90px, transparent 91px),
-    radial-gradient(circle at 82% 88%, #F6D4E6 0 100px, transparent 101px);
-    opacity:.8;
-    z-index:-2;
+  font-family:'Baloo 2',sans-serif;
+  background:linear-gradient(
+      180deg,
+      #F6FFE9 0%,
+      #FFF9EF 45%,
+      #F6F0FF 100%
+  );
+  min-height:100vh;
+  color:var(--ultramarine);
+  overflow-x:hidden;
 }
 
 .pattern{
-    position:fixed;
-    inset:0;
-    background-image:
-    radial-gradient(#F5BCD3 2px, transparent 2px),
-    radial-gradient(#D3B6FF 2px, transparent 2px);
-    background-size:56px 56px;
-    background-position:0 0,28px 28px;
-    opacity:.18;
-    z-index:-1;
+  position:fixed;
+  inset:0;
+  background-image:
+    radial-gradient(var(--periwinkle) 2px, transparent 2px),
+    radial-gradient(var(--vanilla) 2px, transparent 2px);
+  background-size:58px 58px;
+  background-position:0 0,29px 29px;
+  opacity:.18;
+  pointer-events:none;
+  z-index:-1;
 }
 
 .container{
-    width:min(720px,92%);
-    margin:auto;
-    padding:30px 0 60px;
-    position:relative;
+  width:min(760px,92%);
+  margin:auto;
+  padding:30px 0 60px;
+  position:relative;
 }
 
-/* ---------- HEADER ---------- */
+/* background decoration */
 
 .circle{
-    position:absolute;
-    width:360px;
-    height:360px;
-    background:#EAB7F4;
-    border-radius:50%;
-    left:50%;
-    top:0;
-    transform:translateX(-50%);
-    z-index:0;
+  position:absolute;
+  width:360px;
+  height:360px;
+  border-radius:50%;
+  background:#E6C3F2;
+  left:50%;
+  top:0;
+  transform:translateX(-50%);
+  z-index:0;
 }
 
 .star{
-    position:absolute;
-    color:#F8A63A;
-    font-size:70px;
-    z-index:0;
+  position:absolute;
+  font-size:70px;
+  color:var(--vanilla);
+  text-shadow:2px 2px var(--amethyst);
+  z-index:0;
 }
 
-.s1{top:10px;left:-10px;}
-.s2{top:80px;right:-10px;}
+.s1{top:0;left:-8px;}
+.s2{top:90px;right:-8px;}
+.s3{bottom:140px;left:10px;font-size:42px;}
+.s4{bottom:110px;right:80px;font-size:36px;}
+
+/* Header */
 
 .header{
-    position:relative;
-    z-index:2;
-    text-align:center;
-    margin-top:25px;
+  position:relative;
+  z-index:2;
+  text-align:center;
+  margin-top:20px;
 }
 
 .ribbon{
-    background:linear-gradient(90deg,#8D69F8,#B48FFF);
-    color:#fff;
-    border-radius:14px;
-    padding:16px;
-    transform:rotate(-4deg);
-    box-shadow:8px 8px 0 #5A33B5;
-    text-shadow:3px 3px #5A33B5;
-    font-size:48px;
-    font-weight:800;
-    letter-spacing:1px;
+  background:linear-gradient(90deg,var(--amethyst),var(--ultramarine));
+  color:var(--honeydew);
+  font-size:52px;
+  font-weight:800;
+  padding:16px;
+  border-radius:16px;
+  transform:rotate(-4deg);
+  text-shadow:3px 3px #4B0070;
+  box-shadow:8px 8px 0 var(--ultramarine);
 }
 
 .sub{
-    display:inline-block;
-    margin-top:18px;
-    background:#FFFDF8;
-    border:4px solid #4B2D73;
-    border-radius:14px;
-    padding:8px 24px;
-    font-size:24px;
-    font-weight:700;
+  display:inline-block;
+  margin-top:20px;
+  background:var(--honeydew);
+  border:4px solid var(--ultramarine);
+  border-radius:14px;
+  padding:8px 26px;
+  font-size:24px;
+  font-weight:700;
 }
 
 .tip{
-    margin-top:18px;
-    font-size:26px;
-    font-weight:800;
-    color:#6C49A2;
-    line-height:1.2;
+  margin-top:18px;
+  font-size:24px;
+  font-weight:800;
+  color:#6A4AA1;
 }
 
-/* ---------- TICKET ---------- */
+/* Ticket */
 
 .ticket{
-    margin-top:34px;
-    position:relative;
-    border-radius:28px;
-    border:5px solid #4B2D73;
-    overflow:hidden;
-    cursor:pointer;
-    transition:.25s;
-    box-shadow:8px 8px 0 #4B2D73;
+  margin-top:34px;
+  position:relative;
+  border:5px solid var(--ultramarine);
+  border-radius:30px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.25s;
+  box-shadow:8px 8px 0 var(--ultramarine);
 }
 
 .ticket:hover{
-    transform:translateY(-4px);
+  transform:translateY(-4px);
 }
 
 .ticket::before,
 .ticket::after{
-    content:"";
-    position:absolute;
-    top:50%;
-    width:34px;
-    height:34px;
-    border-radius:50%;
-    background:#FFF8F4;
-    border:5px solid #4B2D73;
-    transform:translateY(-50%);
-    z-index:5;
+  content:"";
+  position:absolute;
+  top:50%;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#FFF8F4;
+  border:5px solid var(--ultramarine);
+  transform:translateY(-50%);
 }
 
 .ticket::before{left:-18px;}
 .ticket::after{right:-18px;}
 
 .purple{
-    background:linear-gradient(135deg,#8F6AF6,#B597FF);
+  background:linear-gradient(
+      135deg,
+      var(--periwinkle) 0%,
+      #B18EFF 45%,
+      var(--amethyst) 100%
+  );
 }
 
 .pink{
-    background:linear-gradient(135deg,#F5B8D8,#FFD5E6);
+  background:linear-gradient(
+      135deg,
+      var(--vanilla) 0%,
+      #F7E8BF 35%,
+      var(--honeydew) 100%
+  );
 }
 
 .content{
-    display:flex;
-    gap:18px;
-    align-items:center;
-    padding:22px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:22px;
 }
-
-/* ---------- AVATAR ---------- */
 
 .avatar{
-    width:125px;
-    height:125px;
-    border-radius:24px;
-    object-fit:cover;
-    background:#fff;
-    border:4px solid #FFF8F4;
-    box-shadow:0 8px 18px rgba(0,0,0,.15);
+  width:125px;
+  height:125px;
+  border-radius:24px;
+  object-fit:cover;
+  border:4px solid var(--cream);
+  background:#fff;
+  box-shadow:0 8px 18px rgba(0,0,0,.15);
 }
 
-/* ---------- INFO ---------- */
-
-.info{
-    flex:1;
+.right{
+  flex:1;
 }
 
 .nameBox{
-    background:#FFFDF8;
-    border:3px solid #4B2D73;
-    border-radius:14px;
-    text-align:center;
-    padding:8px;
+  background:var(--cream);
+  border:3px solid var(--ultramarine);
+  border-radius:16px;
+  text-align:center;
+  padding:8px;
 }
 
 .small{
-    color:#8C69C8;
-    font-size:16px;
-    font-weight:600;
+  font-size:15px;
+  font-weight:600;
+  color:var(--amethyst);
 }
 
 .name{
-    font-size:34px;
-    font-weight:800;
-    color:#4B2D73;
-    line-height:1.1;
+  font-size:34px;
+  font-weight:800;
+  color:var(--ultramarine);
+  line-height:1.1;
 }
 
 .scoreBox{
-    margin-top:14px;
-    background:#FFFDF8;
-    border:3px solid #4B2D73;
-    border-radius:16px;
-    padding:10px;
+  margin-top:14px;
+  background:var(--cream);
+  border:3px solid var(--ultramarine);
+  border-radius:16px;
+  padding:10px;
 }
 
 .score{
-    font-family:monospace;
-    font-size:72px;
-    font-weight:800;
-    color:#3E245F;
-    text-align:center;
-    letter-spacing:2px;
-    transition:.15s;
+  font-family:monospace;
+  font-size:72px;
+  font-weight:800;
+  color:var(--ultramarine);
+  text-align:center;
+  letter-spacing:2px;
 }
 
 .comment{
-    margin-top:12px;
-    background:#FFFDF8CC;
-    border-radius:12px;
-    padding:10px 12px;
-    min-height:54px;
-    color:#5B4678;
-    font-size:16px;
-    line-height:1.3;
+  margin-top:12px;
+  background:#FFFFFFCC;
+  border-radius:14px;
+  padding:10px 14px;
+  min-height:54px;
+  color:#5E4A82;
+  font-size:16px;
+  line-height:1.3;
 }
 
 .badge{
-    position:absolute;
-    top:14px;
-    right:18px;
-    background:#FFFDF8;
-    border:3px solid #4B2D73;
-    border-radius:999px;
-    padding:4px 12px;
-    color:#7A53C8;
-    font-size:13px;
-    font-weight:700;
-    transform:rotate(-10deg);
+  position:absolute;
+  top:14px;
+  right:16px;
+  background:var(--vanilla);
+  color:var(--ultramarine);
+  border:3px solid var(--ultramarine);
+  border-radius:999px;
+  padding:4px 12px;
+  font-size:13px;
+  font-weight:800;
+  transform:rotate(-8deg);
 }
 
-/* ---------- FOOTER ---------- */
-
 .footer{
-    margin-top:34px;
-    display:flex;
-    justify-content:flex-end;
+  margin-top:34px;
+  display:flex;
+  justify-content:flex-end;
 }
 
 .football{
-    width:180px;
-    height:auto;
+  width:180px;
 }
 
 @media(max-width:640px){
 
 .ribbon{
-    font-size:38px;
+  font-size:38px;
 }
 
 .tip{
-    font-size:20px;
+  font-size:20px;
 }
 
 .content{
-    flex-direction:column;
-    text-align:center;
+  flex-direction:column;
+  text-align:center;
 }
 
 .avatar{
-    width:140px;
-    height:140px;
+  width:140px;
+  height:140px;
 }
 
 .name{
-    font-size:28px;
+  font-size:28px;
 }
 
 .score{
-    font-size:58px;
+  font-size:58px;
 }
 
 }
+
 </style>
 
 </head>
+
 <body>
 
 <div class="pattern"></div>
@@ -305,8 +313,11 @@ body::before{
 <div class="container">
 
 <div class="circle"></div>
+
 <div class="star s1">★</div>
 <div class="star s2">★</div>
+<div class="star s3">★</div>
+<div class="star s4">★</div>
 
 <div class="header">
 
@@ -320,17 +331,17 @@ Bấm vào từng thẻ để random điểm ✨
 
 </div>
 
-<!-- ==================== VIỆT ANH ==================== -->
+<!-- VIỆT ANH -->
 
 <div class="ticket purple" onclick="rollViet()">
 
-<div class="badge">⭐</div>
+<div class="badge">HONEY</div>
 
 <div class="content">
 
 <img src="vietanh.png" class="avatar" alt="Việt Anh">
 
-<div class="info">
+<div class="right">
 
 <div class="nameBox">
 <div class="small">Bạn nhỏ</div>
@@ -342,7 +353,7 @@ Bấm vào từng thẻ để random điểm ✨
 </div>
 
 <div class="comment" id="vietText">
-Bấm để chấm điểm 🎀
+Bấm để chấm điểm 💕
 </div>
 
 </div>
@@ -351,17 +362,17 @@ Bấm để chấm điểm 🎀
 
 </div>
 
-<!-- ==================== TRANG ==================== -->
+<!-- TRANG -->
 
 <div class="ticket pink" onclick="rollTrang()">
 
-<div class="badge">😌</div>
+<div class="badge">VANILLA</div>
 
 <div class="content">
 
 <img src="trang.png" class="avatar" alt="Trang">
 
-<div class="info">
+<div class="right">
 
 <div class="nameBox">
 <div class="small">Cô</div>
@@ -387,16 +398,36 @@ Bấm để chấm điểm 🌷
 <div class="footer">
 
 <svg class="football" viewBox="0 0 220 140">
-<ellipse cx="110" cy="70" rx="88" ry="58" fill="#FF5B58" transform="rotate(-20 110 70)"/>
-<path d="M68 18 Q110 70 152 122" stroke="#FFF4E8" stroke-width="12"/>
-<path d="M152 18 Q110 70 68 122" stroke="#FFF4E8" stroke-width="12"/>
-<path d="M40 100 Q110 50 180 40" stroke="#3B2D73" stroke-width="3" fill="none"/>
-<g stroke="#3B2D73" stroke-width="3">
+
+<ellipse cx="110" cy="70" rx="88" ry="58"
+fill="#FF625D"
+transform="rotate(-20 110 70)"/>
+
+<path d="M68 18 Q110 70 152 122"
+stroke="#FFF5E8"
+stroke-width="12"/>
+
+<path d="M152 18 Q110 70 68 122"
+stroke="#FFF5E8"
+stroke-width="12"/>
+
+<path d="M40 100 Q110 50 180 40"
+stroke="#290087"
+stroke-width="3"
+fill="none"/>
+
+<g stroke="#290087" stroke-width="3">
+
 <line x1="90" y1="65" x2="130" y2="55"/>
+
 <line x1="98" y1="52" x2="105" y2="68"/>
+
 <line x1="110" y1="48" x2="118" y2="64"/>
+
 <line x1="122" y1="44" x2="130" y2="60"/>
+
 </g>
+
 </svg>
 
 </div>
@@ -405,29 +436,43 @@ Bấm để chấm điểm 🌷
 
 <script>
 
-// ======= NHẬN XÉT CỦA VIỆT ANH =======
+/* ===========================
+   LỜI NHẬN XÉT
+=========================== */
 
-const vietComments=[
+const vietComments = [
+
 "Main character của ngày 💕",
-"Ngoan xinh iu thế nhở? 🌷",
-"Xứng đáng nhận một chiếc tem ⭐",
+
+"Xứng đáng nhận một chiếc tem! ✨",
+
 "Hôm nay phong độ quá đỉnh 🌟",
-"Điểm cao không phải ngẫu nhiên "
+
+"Ngoan xinh iu thế nhở? 🌷",
+
+"Đúng chuẩn bé cưng xuất sắc 💜"
+
 ];
 
-// ======= NHẬN XÉT CỦA TRANG =======
+const trangComments = [
 
-const trangComments=[
 "Quá trời quá đất",
+
 "Coi chỉ quậy kìa",
+
 "Trời đất quơi",
+
 "Xỉu up xỉu down với chỉ",
+
 "Chọt cù lét chỉ đi"
+
 ];
 
-// ======= RANDOM SCORE =======
+/* ===========================
+   RANDOM ĐIỂM
+=========================== */
 
-function animateScore(element,min,max,callback){
+function animateScore(el,min,max,callback){
 
 let frame=0;
 
@@ -435,7 +480,7 @@ const timer=setInterval(()=>{
 
 const value=Math.floor(Math.random()*(max-min+1))+min;
 
-element.textContent=String(value).padStart(3,"0");
+el.textContent=String(value).padStart(3,"0");
 
 frame++;
 
@@ -445,7 +490,7 @@ clearInterval(timer);
 
 const finalValue=Math.floor(Math.random()*(max-min+1))+min;
 
-element.textContent=String(finalValue).padStart(3,"0");
+el.textContent=String(finalValue).padStart(3,"0");
 
 callback();
 
@@ -455,19 +500,28 @@ callback();
 
 }
 
-function randomText(array){
-return array[Math.floor(Math.random()*array.length)];
+function randomText(arr){
+
+return arr[Math.floor(Math.random()*arr.length)];
+
 }
 
 function rollViet(){
 
 animateScore(
+
 document.getElementById("vietScore"),
+
 90,
+
 120,
+
 ()=>{
+
 document.getElementById("vietText").textContent=randomText(vietComments);
+
 }
+
 );
 
 }
@@ -475,12 +529,19 @@ document.getElementById("vietText").textContent=randomText(vietComments);
 function rollTrang(){
 
 animateScore(
+
 document.getElementById("trangScore"),
+
 0,
+
 49,
+
 ()=>{
+
 document.getElementById("trangText").textContent=randomText(trangComments);
+
 }
+
 );
 
 }

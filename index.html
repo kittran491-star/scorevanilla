@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -12,14 +11,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
-  --honeydew:#F6FFE9;
-  --vanilla:#F2E0A4;
-  --periwinkle:#CAC5E5;
   --amethyst:#A230A4;
-  --ultramarine:#290087;
-  --cream:#FFFDF7;
+  --dark:#290087;
+  --periwinkle:#CAC5E5;
+  --vanilla:#F2E0A4;
+  --honeydew:#F6FFE9;
+  --bg:#F8F4FF;
 }
 
 *{
@@ -30,16 +28,13 @@
 
 body{
   font-family:'Baloo 2',sans-serif;
-  background:linear-gradient(
-      180deg,
-      #F6FFE9 0%,
-      #FFF9EF 45%,
-      #F6F0FF 100%
-  );
-  min-height:100vh;
-  color:var(--ultramarine);
+  background:linear-gradient(180deg,#F8F4FF 0%,#F3EEFF 55%,#FFFDF8 100%);
+  color:var(--dark);
   overflow-x:hidden;
+  min-height:100vh;
 }
+
+/* Background */
 
 .pattern{
   position:fixed;
@@ -47,97 +42,116 @@ body{
   background-image:
     radial-gradient(var(--periwinkle) 2px, transparent 2px),
     radial-gradient(var(--vanilla) 2px, transparent 2px);
-  background-size:58px 58px;
-  background-position:0 0,29px 29px;
-  opacity:.18;
+  background-size:56px 56px;
+  background-position:0 0,28px 28px;
+  opacity:.16;
   pointer-events:none;
-  z-index:-1;
+  z-index:-2;
 }
 
 .container{
   width:min(760px,92%);
   margin:auto;
-  padding:30px 0 60px;
+  padding:28px 0 60px;
   position:relative;
 }
 
-/* background decoration */
-
-.circle{
+.blob{
   position:absolute;
-  width:360px;
-  height:360px;
   border-radius:50%;
-  background:#E6C3F2;
+  filter:blur(6px);
+  opacity:.7;
+  z-index:-1;
+}
+
+.b1{
+  width:300px;
+  height:300px;
+  background:#E9C4F3;
+  top:-20px;
   left:50%;
-  top:0;
   transform:translateX(-50%);
-  z-index:0;
+}
+
+.b2{
+  width:130px;
+  height:130px;
+  background:#F9EDBF;
+  right:-30px;
+  top:180px;
+}
+
+.b3{
+  width:150px;
+  height:150px;
+  background:#D7D0F0;
+  left:-40px;
+  bottom:80px;
 }
 
 .star{
   position:absolute;
-  font-size:70px;
   color:var(--vanilla);
   text-shadow:2px 2px var(--amethyst);
-  z-index:0;
+  font-size:58px;
+  z-index:1;
 }
 
-.s1{top:0;left:-8px;}
-.s2{top:90px;right:-8px;}
-.s3{bottom:140px;left:10px;font-size:42px;}
-.s4{bottom:110px;right:80px;font-size:36px;}
+.s1{top:5px;left:-5px;}
+.s2{top:120px;right:-5px;}
+.s3{bottom:145px;left:20px;font-size:34px;}
+.s4{bottom:100px;right:80px;font-size:28px;}
 
 /* Header */
 
 .header{
   position:relative;
-  z-index:2;
   text-align:center;
-  margin-top:20px;
+  z-index:2;
 }
 
 .ribbon{
-  background:linear-gradient(90deg,var(--amethyst),var(--ultramarine));
+  background:linear-gradient(90deg,var(--amethyst),var(--dark));
   color:var(--honeydew);
-  font-size:52px;
-  font-weight:800;
-  padding:16px;
-  border-radius:16px;
+  padding:18px;
+  border-radius:18px;
   transform:rotate(-4deg);
-  text-shadow:3px 3px #4B0070;
-  box-shadow:8px 8px 0 var(--ultramarine);
+  text-shadow:3px 3px var(--dark);
+  box-shadow:8px 8px 0 var(--dark);
+  font-size:50px;
+  font-weight:800;
+  letter-spacing:1px;
 }
 
 .sub{
   display:inline-block;
-  margin-top:20px;
+  margin-top:18px;
   background:var(--honeydew);
-  border:4px solid var(--ultramarine);
+  border:4px solid var(--dark);
   border-radius:14px;
-  padding:8px 26px;
+  padding:8px 24px;
   font-size:24px;
   font-weight:700;
 }
 
 .tip{
   margin-top:18px;
+  color:#6A4AA2;
   font-size:24px;
   font-weight:800;
-  color:#6A4AA1;
 }
 
 /* Ticket */
 
 .ticket{
   margin-top:34px;
-  position:relative;
-  border:5px solid var(--ultramarine);
+  border:5px solid var(--dark);
   border-radius:30px;
   overflow:hidden;
+  position:relative;
   cursor:pointer;
   transition:.25s;
-  box-shadow:8px 8px 0 var(--ultramarine);
+  box-shadow:8px 8px 0 var(--dark);
 }
 
 .ticket:hover{
@@ -148,32 +162,32 @@ body{
 .ticket::after{
   content:"";
   position:absolute;
-  top:50%;
   width:34px;
   height:34px;
-  border-radius:50%;
   background:#FFF8F4;
-  border:5px solid var(--ultramarine);
+  border:5px solid var(--dark);
+  border-radius:50%;
+  top:50%;
   transform:translateY(-50%);
 }
 
 .ticket::before{left:-18px;}
 .ticket::after{right:-18px;}
 
-.purple{
+.viet{
   background:linear-gradient(
       135deg,
       var(--periwinkle) 0%,
-      #B18EFF 45%,
+      #B792FF 45%,
       var(--amethyst) 100%
   );
 }
 
-.pink{
+.trang{
   background:linear-gradient(
       135deg,
-      var(--vanilla) 0%,
-      #F7E8BF 35%,
+      var(--periwinkle) 0%,
+      #E5D7F8 55%,
       var(--honeydew) 100%
   );
 }
@@ -190,7 +204,7 @@ body{
   height:125px;
   border-radius:24px;
   object-fit:cover;
-  border:4px solid var(--cream);
+  border:4px solid white;
   background:#fff;
   box-shadow:0 8px 18px rgba(0,0,0,.15);
 }
@@ -200,9 +214,9 @@ body{
 }
 
 .nameBox{
-  background:var(--cream);
-  border:3px solid var(--ultramarine);
-  border-radius:16px;
+  background:rgba(246,255,233,.95);
+  border:3px solid var(--dark);
+  border-radius:14px;
   text-align:center;
   padding:8px;
 }
@@ -216,14 +230,14 @@ body{
 .name{
   font-size:34px;
   font-weight:800;
-  color:var(--ultramarine);
+  color:var(--dark);
   line-height:1.1;
 }
 
 .scoreBox{
   margin-top:14px;
-  background:var(--cream);
-  border:3px solid var(--ultramarine);
+  background:rgba(246,255,233,.95);
+  border:3px solid var(--dark);
   border-radius:16px;
   padding:10px;
 }
@@ -232,20 +246,21 @@ body{
   font-family:monospace;
   font-size:72px;
   font-weight:800;
-  color:var(--ultramarine);
   text-align:center;
+  color:var(--dark);
   letter-spacing:2px;
+  transition:.15s;
 }
 
 .comment{
   margin-top:12px;
-  background:#FFFFFFCC;
+  background:rgba(255,255,255,.75);
   border-radius:14px;
   padding:10px 14px;
-  min-height:54px;
-  color:#5E4A82;
+  min-height:56px;
   font-size:16px;
-  line-height:1.3;
+  color:#5E4A82;
+  line-height:1.35;
 }
 
 .badge{
@@ -253,8 +268,8 @@ body{
   top:14px;
   right:16px;
   background:var(--vanilla);
-  color:var(--ultramarine);
-  border:3px solid var(--ultramarine);
+  color:var(--dark);
+  border:3px solid var(--dark);
   border-radius:999px;
   padding:4px 12px;
   font-size:13px;
@@ -262,15 +277,19 @@ body{
   transform:rotate(-8deg);
 }
 
+/* Football */
+
 .footer{
-  margin-top:34px;
   display:flex;
   justify-content:flex-end;
+  margin-top:34px;
 }
 
 .football{
   width:180px;
 }
+
+/* Responsive */
 
 @media(max-width:640px){
 
@@ -279,7 +298,7 @@ body{
 }
 
 .tip{
-  font-size:20px;
+  font-size:19px;
 }
 
 .content{
@@ -288,8 +307,8 @@ body{
 }
 
 .avatar{
-  width:140px;
-  height:140px;
+  width:145px;
+  height:145px;
 }
 
 .name{
@@ -301,9 +320,7 @@ body{
 }
 
 }
-
 </style>
-
 </head>
 
 <body>
@@ -312,7 +329,9 @@ body{
 
 <div class="container">
 
-<div class="circle"></div>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
 
 <div class="star s1">★</div>
 <div class="star s2">★</div>
@@ -333,7 +352,7 @@ Bấm vào từng thẻ để random điểm ✨
 
 <!-- VIỆT ANH -->
 
-<div class="ticket purple" onclick="rollViet()">
+<div class="ticket viet" onclick="rollViet()">
 
 <div class="badge">HONEY</div>
 
@@ -349,10 +368,10 @@ Bấm vào từng thẻ để random điểm ✨
 </div>
 
 <div class="scoreBox">
-<div class="score" id="vietScore">000</div>
+<div id="vietScore" class="score">000</div>
 </div>
 
-<div class="comment" id="vietText">
+<div id="vietText" class="comment">
 Bấm để chấm điểm 💕
 </div>
 
@@ -364,7 +383,7 @@ Bấm để chấm điểm 💕
 
 <!-- TRANG -->
 
-<div class="ticket pink" onclick="rollTrang()">
+<div class="ticket trang" onclick="rollTrang()">
 
 <div class="badge">VANILLA</div>
 
@@ -380,10 +399,10 @@ Bấm để chấm điểm 💕
 </div>
 
 <div class="scoreBox">
-<div class="score" id="trangScore">000</div>
+<div id="trangScore" class="score">000</div>
 </div>
 
-<div class="comment" id="trangText">
+<div id="trangText" class="comment">
 Bấm để chấm điểm 🌷
 </div>
 
@@ -400,15 +419,15 @@ Bấm để chấm điểm 🌷
 <svg class="football" viewBox="0 0 220 140">
 
 <ellipse cx="110" cy="70" rx="88" ry="58"
-fill="#FF625D"
+fill="#FF615E"
 transform="rotate(-20 110 70)"/>
 
 <path d="M68 18 Q110 70 152 122"
-stroke="#FFF5E8"
+stroke="#FFF7EC"
 stroke-width="12"/>
 
 <path d="M152 18 Q110 70 68 122"
-stroke="#FFF5E8"
+stroke="#FFF7EC"
 stroke-width="12"/>
 
 <path d="M40 100 Q110 50 180 40"
@@ -417,15 +436,10 @@ stroke-width="3"
 fill="none"/>
 
 <g stroke="#290087" stroke-width="3">
-
 <line x1="90" y1="65" x2="130" y2="55"/>
-
 <line x1="98" y1="52" x2="105" y2="68"/>
-
 <line x1="110" y1="48" x2="118" y2="64"/>
-
 <line x1="122" y1="44" x2="130" y2="60"/>
-
 </g>
 
 </svg>
@@ -436,41 +450,21 @@ fill="none"/>
 
 <script>
 
-/* ===========================
-   LỜI NHẬN XÉT
-=========================== */
-
-const vietComments = [
-
+const vietComments=[
 "Main character của ngày 💕",
-
 "Xứng đáng nhận một chiếc tem! ✨",
-
 "Hôm nay phong độ quá đỉnh 🌟",
-
 "Ngoan xinh iu thế nhở? 🌷",
-
 "Đúng chuẩn bé cưng xuất sắc 💜"
-
 ];
 
-const trangComments = [
-
+const trangComments=[
 "Quá trời quá đất",
-
 "Coi chỉ quậy kìa",
-
 "Trời đất quơi",
-
 "Xỉu up xỉu down với chỉ",
-
 "Chọt cù lét chỉ đi"
-
 ];
-
-/* ===========================
-   RANDOM ĐIỂM
-=========================== */
 
 function animateScore(el,min,max,callback){
 
@@ -501,27 +495,18 @@ callback();
 }
 
 function randomText(arr){
-
 return arr[Math.floor(Math.random()*arr.length)];
-
 }
 
 function rollViet(){
 
 animateScore(
-
 document.getElementById("vietScore"),
-
 90,
-
 120,
-
 ()=>{
-
 document.getElementById("vietText").textContent=randomText(vietComments);
-
 }
-
 );
 
 }
@@ -529,19 +514,12 @@ document.getElementById("vietText").textContent=randomText(vietComments);
 function rollTrang(){
 
 animateScore(
-
 document.getElementById("trangScore"),
-
 0,
-
 49,
-
 ()=>{
-
 document.getElementById("trangText").textContent=randomText(trangComments);
-
 }
-
 );
 
 }

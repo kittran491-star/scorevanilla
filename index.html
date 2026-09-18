@@ -7,7 +7,10 @@
 
 <title>Score Board</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
 *{
     margin:0;
@@ -16,23 +19,24 @@
 }
 
 body{
-    font-family:'Luckiest Guy',cursive;
-    background:#FFF8F3;
+    font-family:'Baloo 2',sans-serif;
+    background:#FFF8F4;
     overflow-x:hidden;
+    color:#4B2D73;
 }
 
-/* ---------- Background ---------- */
+/* ---------- BACKGROUND ---------- */
 
 body::before{
     content:"";
     position:fixed;
     inset:0;
     background:
-    radial-gradient(circle at 15% 15%, #FFD7E8 0 90px, transparent 91px),
-    radial-gradient(circle at 85% 20%, #DCC9FF 0 120px, transparent 121px),
-    radial-gradient(circle at 20% 80%, #FFE9BF 0 80px, transparent 81px),
-    radial-gradient(circle at 80% 85%, #F6D2E6 0 100px, transparent 101px);
-    opacity:.7;
+    radial-gradient(circle at 10% 15%, #FFD8E8 0 110px, transparent 111px),
+    radial-gradient(circle at 88% 18%, #DCC7FF 0 120px, transparent 121px),
+    radial-gradient(circle at 15% 82%, #FFEAB9 0 90px, transparent 91px),
+    radial-gradient(circle at 82% 88%, #F6D4E6 0 100px, transparent 101px);
+    opacity:.8;
     z-index:-2;
 }
 
@@ -40,11 +44,11 @@ body::before{
     position:fixed;
     inset:0;
     background-image:
-    radial-gradient(#F6B4CF 2px, transparent 2px),
-    radial-gradient(#C8A8FF 2px, transparent 2px);
-    background-size:60px 60px;
-    background-position:0 0,30px 30px;
-    opacity:.15;
+    radial-gradient(#F5BCD3 2px, transparent 2px),
+    radial-gradient(#D3B6FF 2px, transparent 2px);
+    background-size:56px 56px;
+    background-position:0 0,28px 28px;
+    opacity:.18;
     z-index:-1;
 }
 
@@ -52,55 +56,83 @@ body::before{
     width:min(720px,92%);
     margin:auto;
     padding:30px 0 60px;
+    position:relative;
 }
 
-/* ---------- Header ---------- */
+/* ---------- HEADER ---------- */
+
+.circle{
+    position:absolute;
+    width:360px;
+    height:360px;
+    background:#EAB7F4;
+    border-radius:50%;
+    left:50%;
+    top:0;
+    transform:translateX(-50%);
+    z-index:0;
+}
+
+.star{
+    position:absolute;
+    color:#F8A63A;
+    font-size:70px;
+    z-index:0;
+}
+
+.s1{top:10px;left:-10px;}
+.s2{top:80px;right:-10px;}
+
+.header{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    margin-top:25px;
+}
 
 .ribbon{
-    background:linear-gradient(90deg,#8E6CF8,#B48DFF);
+    background:linear-gradient(90deg,#8D69F8,#B48FFF);
     color:#fff;
-    text-align:center;
-    padding:18px;
-    font-family:'Baloo 2';
-    font-size:52px;
-    font-weight:800;
     border-radius:14px;
+    padding:16px;
     transform:rotate(-4deg);
-    text-shadow:3px 3px #5A33B5;
     box-shadow:8px 8px 0 #5A33B5;
-}
-
-.sub{
-    width:max-content;
-    margin:18px auto 0;
-    background:#FFFDF8;
-    border:4px solid #4A2C74;
-    border-radius:14px;
-    padding:8px 24px;
-    font-family:'Baloo 2';
-    font-size:24px;
-    color:#4A2C74;
-}
-
-.tip{
-    text-align:center;
-    margin-top:16px;
-    color:#6C4A93;
-    font-weight:600;
+    text-shadow:3px 3px #5A33B5;
+    font-size:48px;
+    font-weight:800;
     letter-spacing:1px;
 }
 
-/* ---------- Ticket ---------- */
+.sub{
+    display:inline-block;
+    margin-top:18px;
+    background:#FFFDF8;
+    border:4px solid #4B2D73;
+    border-radius:14px;
+    padding:8px 24px;
+    font-size:24px;
+    font-weight:700;
+}
+
+.tip{
+    margin-top:18px;
+    font-size:26px;
+    font-weight:800;
+    color:#6C49A2;
+    line-height:1.2;
+}
+
+/* ---------- TICKET ---------- */
 
 .ticket{
-    margin-top:28px;
+    margin-top:34px;
     position:relative;
     border-radius:28px;
-    border:5px solid #4A2C74;
+    border:5px solid #4B2D73;
     overflow:hidden;
     cursor:pointer;
     transition:.25s;
-    box-shadow:8px 8px 0 #4A2C74;
+    box-shadow:8px 8px 0 #4B2D73;
 }
 
 .ticket:hover{
@@ -114,9 +146,9 @@ body::before{
     top:50%;
     width:34px;
     height:34px;
-    background:#FFF8F3;
-    border:5px solid #4A2C74;
     border-radius:50%;
+    background:#FFF8F4;
+    border:5px solid #4B2D73;
     transform:translateY(-50%);
     z-index:5;
 }
@@ -125,74 +157,75 @@ body::before{
 .ticket::after{right:-18px;}
 
 .purple{
-    background:linear-gradient(135deg,#8F6AF6,#B595FF);
+    background:linear-gradient(135deg,#8F6AF6,#B597FF);
 }
 
 .pink{
-    background:linear-gradient(135deg,#F6B8D7,#FFD4E5);
+    background:linear-gradient(135deg,#F5B8D8,#FFD5E6);
 }
 
 .content{
-    padding:20px;
     display:flex;
     gap:18px;
     align-items:center;
+    padding:22px;
 }
 
-/* ---------- Avatar ---------- */
+/* ---------- AVATAR ---------- */
 
 .avatar{
-    width:120px;
-    height:120px;
-    border-radius:22px;
-    border:4px solid #FFF8F3;
+    width:125px;
+    height:125px;
+    border-radius:24px;
     object-fit:cover;
-    background:#ffffff55;
-    box-shadow:0 6px 16px rgba(0,0,0,.15);
+    background:#fff;
+    border:4px solid #FFF8F4;
+    box-shadow:0 8px 18px rgba(0,0,0,.15);
 }
 
-/* ---------- Right ---------- */
+/* ---------- INFO ---------- */
 
-.right{
+.info{
     flex:1;
 }
 
 .nameBox{
     background:#FFFDF8;
-    border:3px solid #4A2C74;
+    border:3px solid #4B2D73;
     border-radius:14px;
     text-align:center;
     padding:8px;
 }
 
 .small{
-    color:#8B69C8;
-    font-size:15px;
+    color:#8C69C8;
+    font-size:16px;
     font-weight:600;
 }
 
 .name{
-    font-family:'Baloo 2';
     font-size:34px;
-    color:#4A2C74;
     font-weight:800;
+    color:#4B2D73;
     line-height:1.1;
 }
 
 .scoreBox{
     margin-top:14px;
     background:#FFFDF8;
-    border:3px solid #4A2C74;
+    border:3px solid #4B2D73;
     border-radius:16px;
-    padding:12px;
+    padding:10px;
 }
 
 .score{
-    font-family:'Baloo 2';
-    text-align:center;
-    font-size:68px;
-    color:#4A2C74;
+    font-family:monospace;
+    font-size:72px;
     font-weight:800;
+    color:#3E245F;
+    text-align:center;
+    letter-spacing:2px;
+    transition:.15s;
 }
 
 .comment{
@@ -200,37 +233,48 @@ body::before{
     background:#FFFDF8CC;
     border-radius:12px;
     padding:10px 12px;
-    min-height:50px;
+    min-height:54px;
     color:#5B4678;
-    font-size:15px;
-    font-weight:500;
-    transition:.25s;
+    font-size:16px;
+    line-height:1.3;
 }
 
-/* ---------- Decorations ---------- */
-
-.sticker{
+.badge{
     position:absolute;
     top:14px;
     right:18px;
-    background:#FFF8F3;
-    color:#7A52C8;
-    border:3px solid #4A2C74;
+    background:#FFFDF8;
+    border:3px solid #4B2D73;
     border-radius:999px;
-    padding:4px 10px;
+    padding:4px 12px;
+    color:#7A53C8;
     font-size:13px;
     font-weight:700;
     transform:rotate(-10deg);
 }
 
+/* ---------- FOOTER ---------- */
+
 .footer{
     margin-top:34px;
-    text-align:center;
-    color:#8B69C8;
-    font-size:14px;
+    display:flex;
+    justify-content:flex-end;
+}
+
+.football{
+    width:180px;
+    height:auto;
 }
 
 @media(max-width:640px){
+
+.ribbon{
+    font-size:38px;
+}
+
+.tip{
+    font-size:20px;
+}
 
 .content{
     flex-direction:column;
@@ -242,45 +286,51 @@ body::before{
     height:140px;
 }
 
-.ribbon{
-    font-size:40px;
-}
-
 .name{
     font-size:28px;
 }
 
 .score{
-    font-size:56px;
+    font-size:58px;
 }
 
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <div class="pattern"></div>
 
 <div class="container">
 
+<div class="circle"></div>
+<div class="star s1">★</div>
+<div class="star s2">★</div>
+
+<div class="header">
+
 <div class="ribbon">SCORE BOARD</div>
 
 <div class="sub">Bảng Chấm Điểm</div>
 
-<div class="tip">Bấm vào từng thẻ để random điểm ✨</div>
+<div class="tip">
+Bấm vào từng thẻ để random điểm ✨
+</div>
 
-<!-- Việt Anh -->
+</div>
+
+<!-- ==================== VIỆT ANH ==================== -->
 
 <div class="ticket purple" onclick="rollViet()">
 
-<div class="sticker">⭐</div>
+<div class="badge">⭐</div>
 
 <div class="content">
 
 <img src="vietanh.png" class="avatar" alt="Việt Anh">
 
-<div class="right">
+<div class="info">
 
 <div class="nameBox">
 <div class="small">Bạn nhỏ</div>
@@ -296,20 +346,22 @@ Bấm để chấm điểm 🎀
 </div>
 
 </div>
-</div>
+
 </div>
 
-<!-- Trang -->
+</div>
+
+<!-- ==================== TRANG ==================== -->
 
 <div class="ticket pink" onclick="rollTrang()">
 
-<div class="sticker">💗</div>
+<div class="badge">😌</div>
 
 <div class="content">
 
 <img src="trang.png" class="avatar" alt="Trang">
 
-<div class="right">
+<div class="info">
 
 <div class="nameBox">
 <div class="small">Cô</div>
@@ -325,24 +377,45 @@ Bấm để chấm điểm 🌷
 </div>
 
 </div>
-</div>
+
 </div>
 
+</div>
+
+<!-- FOOTBALL -->
+
 <div class="footer">
-Pastel • Random Score • Made with ♡
+
+<svg class="football" viewBox="0 0 220 140">
+<ellipse cx="110" cy="70" rx="88" ry="58" fill="#FF5B58" transform="rotate(-20 110 70)"/>
+<path d="M68 18 Q110 70 152 122" stroke="#FFF4E8" stroke-width="12"/>
+<path d="M152 18 Q110 70 68 122" stroke="#FFF4E8" stroke-width="12"/>
+<path d="M40 100 Q110 50 180 40" stroke="#3B2D73" stroke-width="3" fill="none"/>
+<g stroke="#3B2D73" stroke-width="3">
+<line x1="90" y1="65" x2="130" y2="55"/>
+<line x1="98" y1="52" x2="105" y2="68"/>
+<line x1="110" y1="48" x2="118" y2="64"/>
+<line x1="122" y1="44" x2="130" y2="60"/>
+</g>
+</svg>
+
 </div>
 
 </div>
 
 <script>
 
+// ======= NHẬN XÉT CỦA VIỆT ANH =======
+
 const vietComments=[
 "Main character của ngày 💕",
-"Xứng đáng nhận một chiếc tem! ✨",
+"Ngoan xinh iu thế nhở? 🌷",
+"Xứng đáng nhận một chiếc tem ⭐",
 "Hôm nay phong độ quá đỉnh 🌟",
-"Ngoan xinh iu thế nhở? 🌷",
-"Đúng chuẩn bé cưng xuất sắc 💜"
+"Điểm cao không phải ngẫu nhiên "
 ];
+
+// ======= NHẬN XÉT CỦA TRANG =======
 
 const trangComments=[
 "Quá trời quá đất",
@@ -352,7 +425,9 @@ const trangComments=[
 "Chọt cù lét chỉ đi"
 ];
 
-function animateScore(el,min,max,callback){
+// ======= RANDOM SCORE =======
+
+function animateScore(element,min,max,callback){
 
 let frame=0;
 
@@ -360,17 +435,17 @@ const timer=setInterval(()=>{
 
 const value=Math.floor(Math.random()*(max-min+1))+min;
 
-el.textContent=String(value).padStart(3,'0');
+element.textContent=String(value).padStart(3,"0");
 
 frame++;
 
-if(frame>22){
+if(frame>=24){
 
 clearInterval(timer);
 
-const final=Math.floor(Math.random()*(max-min+1))+min;
+const finalValue=Math.floor(Math.random()*(max-min+1))+min;
 
-el.textContent=String(final).padStart(3,'0');
+element.textContent=String(finalValue).padStart(3,"0");
 
 callback();
 
@@ -380,8 +455,8 @@ callback();
 
 }
 
-function randomText(arr){
-return arr[Math.floor(Math.random()*arr.length)];
+function randomText(array){
+return array[Math.floor(Math.random()*array.length)];
 }
 
 function rollViet(){

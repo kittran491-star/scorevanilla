@@ -1,39 +1,417 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Score Board</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-    body{background:#F6F1EA;overflow-x:hidden}
-    .container{max-width:720px;margin:auto;padding:28px 18px 40px;position:relative}
-    .bg-circle{position:absolute;width:360px;height:360px;background:#E8B5F2;border-radius:50%;top:20px;left:50%;transform:translateX(-50%)}
-    .star{position:absolute;font-size:70px;color:#F7A93B}.s1{top:20px;left:10px}.s2{top:120px;right:0}.s3{bottom:80px;left:40px;font-size:55px}.s4{bottom:140px;right:70px;font-size:45px}
-    .header{text-align:center;position:relative;margin-top:40px}
-    .ribbon{background:linear-gradient(90deg,#8E6CF8,#A678FF);color:#fff;font-size:56px;font-weight:900;padding:18px;border-radius:8px;transform:rotate(-7deg);text-shadow:4px 4px #3B005A;box-shadow:8px 8px #4B006B;letter-spacing:2px}
-    .subtitle{display:inline-block;background:#FFF7ED;border:4px solid #43104D;padding:10px 34px;margin-top:-8px;font-size:24px;font-weight:700}
-    .tip{margin-top:24px;color:#35104A;letter-spacing:2px;font-size:14px;font-weight:700}
-    .ticket{margin-top:30px;border:5px solid #3B005A;border-radius:28px;padding:22px;position:relative;box-shadow:8px 8px #4B006B;cursor:pointer;transition:.2s}.ticket:hover{transform:translateY(-4px)}
-    .purple{background:linear-gradient(90deg,#8F6AF6,#A17CFF)}.pink{background:linear-gradient(90deg,#F4B6DA,#F7C7E4)}
-    .ticket:before,.ticket:after{content:"";position:absolute;width:34px;height:34px;border-radius:50%;background:#F6F1EA;border:5px solid #3B005A;top:50%;transform:translateY(-50%)}.ticket:before{left:-22px}.ticket:after{right:-22px}
-    .row{display:flex;align-items:center;gap:18px}.avatar{width:120px;height:120px;flex-shrink:0}.info{flex:1}
-    .namebox{background:#FFF7ED;border:4px solid #3B005A;border-radius:8px;text-align:center;padding:8px}.small{font-size:18px;font-weight:700;color:#35104A}.name{font-size:40px;font-weight:900;color:#35104A}
-    .scorewrap{margin-top:14px;background:#FFF7ED;border:4px solid #3B005A;padding:12px;display:flex;justify-content:center}.score{font-family:monospace;font-size:78px;font-weight:900;color:#3B005A;letter-spacing:3px;transition:.15s}
-    .doodle{position:absolute;top:20px;right:22px;color:#3B005A;font-size:24px;font-weight:900;transform:rotate(-12deg)}.hearts{font-size:30px}.footer{margin-top:34px;display:flex;justify-content:flex-end}.football{width:180px;height:120px}
-    @media(max-width:600px){.ribbon{font-size:42px}.name{font-size:32px}.score{font-size:58px}.avatar{width:92px;height:92px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Score Board</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Fredoka',sans-serif;
+    background:#FFF8F3;
+    overflow-x:hidden;
+}
+
+/* ---------- Background ---------- */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at 15% 15%, #FFD7E8 0 90px, transparent 91px),
+    radial-gradient(circle at 85% 20%, #DCC9FF 0 120px, transparent 121px),
+    radial-gradient(circle at 20% 80%, #FFE9BF 0 80px, transparent 81px),
+    radial-gradient(circle at 80% 85%, #F6D2E6 0 100px, transparent 101px);
+    opacity:.7;
+    z-index:-2;
+}
+
+.pattern{
+    position:fixed;
+    inset:0;
+    background-image:
+    radial-gradient(#F6B4CF 2px, transparent 2px),
+    radial-gradient(#C8A8FF 2px, transparent 2px);
+    background-size:60px 60px;
+    background-position:0 0,30px 30px;
+    opacity:.15;
+    z-index:-1;
+}
+
+.container{
+    width:min(720px,92%);
+    margin:auto;
+    padding:30px 0 60px;
+}
+
+/* ---------- Header ---------- */
+
+.ribbon{
+    background:linear-gradient(90deg,#8E6CF8,#B48DFF);
+    color:#fff;
+    text-align:center;
+    padding:18px;
+    font-family:'Baloo 2';
+    font-size:52px;
+    font-weight:800;
+    border-radius:14px;
+    transform:rotate(-4deg);
+    text-shadow:3px 3px #5A33B5;
+    box-shadow:8px 8px 0 #5A33B5;
+}
+
+.sub{
+    width:max-content;
+    margin:18px auto 0;
+    background:#FFFDF8;
+    border:4px solid #4A2C74;
+    border-radius:14px;
+    padding:8px 24px;
+    font-family:'Baloo 2';
+    font-size:24px;
+    color:#4A2C74;
+}
+
+.tip{
+    text-align:center;
+    margin-top:16px;
+    color:#6C4A93;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+/* ---------- Ticket ---------- */
+
+.ticket{
+    margin-top:28px;
+    position:relative;
+    border-radius:28px;
+    border:5px solid #4A2C74;
+    overflow:hidden;
+    cursor:pointer;
+    transition:.25s;
+    box-shadow:8px 8px 0 #4A2C74;
+}
+
+.ticket:hover{
+    transform:translateY(-4px);
+}
+
+.ticket::before,
+.ticket::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    width:34px;
+    height:34px;
+    background:#FFF8F3;
+    border:5px solid #4A2C74;
+    border-radius:50%;
+    transform:translateY(-50%);
+    z-index:5;
+}
+
+.ticket::before{left:-18px;}
+.ticket::after{right:-18px;}
+
+.purple{
+    background:linear-gradient(135deg,#8F6AF6,#B595FF);
+}
+
+.pink{
+    background:linear-gradient(135deg,#F6B8D7,#FFD4E5);
+}
+
+.content{
+    padding:20px;
+    display:flex;
+    gap:18px;
+    align-items:center;
+}
+
+/* ---------- Avatar ---------- */
+
+.avatar{
+    width:120px;
+    height:120px;
+    border-radius:22px;
+    border:4px solid #FFF8F3;
+    object-fit:cover;
+    background:#ffffff55;
+    box-shadow:0 6px 16px rgba(0,0,0,.15);
+}
+
+/* ---------- Right ---------- */
+
+.right{
+    flex:1;
+}
+
+.nameBox{
+    background:#FFFDF8;
+    border:3px solid #4A2C74;
+    border-radius:14px;
+    text-align:center;
+    padding:8px;
+}
+
+.small{
+    color:#8B69C8;
+    font-size:15px;
+    font-weight:600;
+}
+
+.name{
+    font-family:'Baloo 2';
+    font-size:34px;
+    color:#4A2C74;
+    font-weight:800;
+    line-height:1.1;
+}
+
+.scoreBox{
+    margin-top:14px;
+    background:#FFFDF8;
+    border:3px solid #4A2C74;
+    border-radius:16px;
+    padding:12px;
+}
+
+.score{
+    font-family:'Baloo 2';
+    text-align:center;
+    font-size:68px;
+    color:#4A2C74;
+    font-weight:800;
+}
+
+.comment{
+    margin-top:12px;
+    background:#FFFDF8CC;
+    border-radius:12px;
+    padding:10px 12px;
+    min-height:50px;
+    color:#5B4678;
+    font-size:15px;
+    font-weight:500;
+    transition:.25s;
+}
+
+/* ---------- Decorations ---------- */
+
+.sticker{
+    position:absolute;
+    top:14px;
+    right:18px;
+    background:#FFF8F3;
+    color:#7A52C8;
+    border:3px solid #4A2C74;
+    border-radius:999px;
+    padding:4px 10px;
+    font-size:13px;
+    font-weight:700;
+    transform:rotate(-10deg);
+}
+
+.footer{
+    margin-top:34px;
+    text-align:center;
+    color:#8B69C8;
+    font-size:14px;
+}
+
+@media(max-width:640px){
+
+.content{
+    flex-direction:column;
+    text-align:center;
+}
+
+.avatar{
+    width:140px;
+    height:140px;
+}
+
+.ribbon{
+    font-size:40px;
+}
+
+.name{
+    font-size:28px;
+}
+
+.score{
+    font-size:56px;
+}
+
+}
+</style>
 </head>
+
 <body>
+
+<div class="pattern"></div>
+
 <div class="container">
-<div class="bg-circle"></div><div class="star s1">★</div><div class="star s2">★</div><div class="star s3">★</div><div class="star s4">★</div>
-<div class="header"><div class="ribbon">SCORE BOARD</div><div class="subtitle">Bảng Chấm Điểm</div><div class="tip">BẤM VÀO TỪNG THẺ ĐỂ RANDOM ĐIỂM</div></div>
-<div class="ticket purple" onclick="roll('viet',90,120)"><div class="doodle">♕ MVP!</div><div class="row"><svg class="avatar" viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="#FFF7ED" stroke="#3B005A" stroke-width="4"/><ellipse cx="60" cy="68" rx="36" ry="30" fill="#FFE8D6"/><path d="M20 42 Q60 8 100 40 L96 54 Q60 26 24 52 Z" fill="#2E124A"/><path d="M18 34 L62 18 L102 38 L92 48 L28 46 Z" fill="#8F6AF6" stroke="#3B005A" stroke-width="3"/><circle cx="48" cy="66" r="3" fill="#2E124A"/><circle cx="72" cy="66" r="3" fill="#2E124A"/><path d="M50 80 Q60 86 70 80" stroke="#C46B8A" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="40" cy="74" r="4" fill="#F6B3C7"/><circle cx="80" cy="74" r="4" fill="#F6B3C7"/></svg><div class="info"><div class="namebox"><div class="small">Bạn nhỏ</div><div class="name">Việt Anh</div></div><div class="scorewrap"><div id="viet" class="score">100</div></div></div></div></div>
-<div class="ticket pink" onclick="roll('trang',0,49)"><div class="doodle hearts">♡ ♡</div><div class="row"><svg class="avatar" viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="#FFF7ED" stroke="#3B005A" stroke-width="4"/><circle cx="60" cy="24" r="16" fill="#2E124A"/><path d="M30 36 Q60 8 90 36 L96 60 Q60 20 24 58 Z" fill="#3A1A55"/><ellipse cx="60" cy="68" rx="36" ry="30" fill="#FFE8D6"/><path d="M32 48 Q24 62 30 82" stroke="#3A1A55" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="48" cy="66" r="3" fill="#2E124A"/><circle cx="72" cy="66" r="3" fill="#2E124A"/><path d="M50 80 Q60 86 70 80" stroke="#C46B8A" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="40" cy="74" r="4" fill="#F6B3C7"/><circle cx="80" cy="74" r="4" fill="#F6B3C7"/><rect x="30" y="52" width="12" height="5" rx="2" fill="#A678FF"/></svg><div class="info"><div class="namebox"><div class="small">Cô</div><div class="name">Trang</div></div><div class="scorewrap"><div id="trang" class="score">17</div></div></div></div></div>
-<div class="footer"><svg class="football" viewBox="0 0 220 140"><ellipse cx="110" cy="70" rx="88" ry="58" fill="#FF5B58" transform="rotate(-20 110 70)"/><path d="M68 18 Q110 70 152 122" stroke="#FFF4E8" stroke-width="12"/><path d="M152 18 Q110 70 68 122" stroke="#FFF4E8" stroke-width="12"/><path d="M40 100 Q110 50 180 40" stroke="#3B005A" stroke-width="3" fill="none"/><g stroke="#3B005A" stroke-width="3"><line x1="90" y1="65" x2="130" y2="55"/><line x1="98" y1="52" x2="105" y2="68"/><line x1="110" y1="48" x2="118" y2="64"/><line x1="122" y1="44" x2="130" y2="60"/></g></svg></div>
+
+<div class="ribbon">SCORE BOARD</div>
+
+<div class="sub">Bảng Chấm Điểm</div>
+
+<div class="tip">Bấm vào từng thẻ để random điểm ✨</div>
+
+<!-- Việt Anh -->
+
+<div class="ticket purple" onclick="rollViet()">
+
+<div class="sticker">⭐ BEST</div>
+
+<div class="content">
+
+<img src="vietanh.png" class="avatar" alt="Việt Anh">
+
+<div class="right">
+
+<div class="nameBox">
+<div class="small">Bạn nhỏ</div>
+<div class="name">Việt Anh</div>
 </div>
+
+<div class="scoreBox">
+<div class="score" id="vietScore">000</div>
+</div>
+
+<div class="comment" id="vietText">
+Bấm để chấm điểm 🎀
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- Trang -->
+
+<div class="ticket pink" onclick="rollTrang()">
+
+<div class="sticker">💗 CUTE</div>
+
+<div class="content">
+
+<img src="trang.png" class="avatar" alt="Trang">
+
+<div class="right">
+
+<div class="nameBox">
+<div class="small">Cô</div>
+<div class="name">Trang</div>
+</div>
+
+<div class="scoreBox">
+<div class="score" id="trangScore">000</div>
+</div>
+
+<div class="comment" id="trangText">
+Bấm để chấm điểm 🌷
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="footer">
+Pastel • Random Score • Made with ♡
+</div>
+
+</div>
+
 <script>
-function roll(id,min,max){const el=document.getElementById(id);let i=0;const timer=setInterval(()=>{el.textContent=Math.floor(Math.random()*(max-min+1))+min;el.style.transform='scale(1.08)';if(++i>=22){clearInterval(timer);el.textContent=Math.floor(Math.random()*(max-min+1))+min;el.style.transform='scale(1)';}},40);}
+
+const vietComments=[
+"Main character của ngày ✨",
+"Xứng đáng nhận một chiếc tem!",
+"Hôm nay phong độ quá đỉnh 🌟",
+"100 điểm thần thái luôn đó.",
+"Đúng chuẩn bé cưng xuất sắc 💜"
+];
+
+const trangComments=[
+"Hôm nay vẫn rất đáng yêu 🌷",
+"Điểm số chỉ mang tính giải trí thôi!",
+"Mai thử lại biết đâu cao hơn ✨",
+"Cố lên nha, vẫn có quà 💕",
+"Không sao hết, chill thôi ☁️"
+];
+
+function animateScore(el,min,max,callback){
+
+let frame=0;
+
+const timer=setInterval(()=>{
+
+const value=Math.floor(Math.random()*(max-min+1))+min;
+
+el.textContent=String(value).padStart(3,'0');
+
+frame++;
+
+if(frame>22){
+
+clearInterval(timer);
+
+const final=Math.floor(Math.random()*(max-min+1))+min;
+
+el.textContent=String(final).padStart(3,'0');
+
+callback();
+
+}
+
+},40);
+
+}
+
+function randomText(arr){
+return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function rollViet(){
+
+animateScore(
+document.getElementById("vietScore"),
+90,
+120,
+()=>{
+document.getElementById("vietText").textContent=randomText(vietComments);
+}
+);
+
+}
+
+function rollTrang(){
+
+animateScore(
+document.getElementById("trangScore"),
+0,
+49,
+()=>{
+document.getElementById("trangText").textContent=randomText(trangComments);
+}
+);
+
+}
+
 </script>
+
 </body>
 </html>
